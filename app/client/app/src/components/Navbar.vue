@@ -4,7 +4,7 @@
       <a class="navbar-item" href="#">
         <img src="../assets/img/logo.png">
       </a>
-      <a class="navbar-item" href="#">
+      <a class="navbar-item" href="/">
         Flask-Vue
       </a>
     </div>

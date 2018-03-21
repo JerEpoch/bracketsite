@@ -8,6 +8,9 @@ import PageOne from './views/PageOne'
 import PageTwo from './views/PageTwo'
 import Login from './views/Login'
 
+import Bracket from './views/Bracket'
+import Index from './views/index'
+
 Vue.use(Router)
 
 export default new Router({
@@ -15,7 +18,9 @@ export default new Router({
     {
       path: '/',
       components: {
-        main: Login
+        navbar: Navbar,
+        subnavbar: SubNavbar,
+        main: Index
       }
     },
     {
@@ -33,6 +38,15 @@ export default new Router({
         subnavbar: SubNavbar,
         main: PageTwo
       }
+    },
+    {
+      path: '/bracket',
+      components: {
+        navbar: Navbar,
+        subnavbar: SubNavbar,
+        main: Bracket
+      }
     }
+
   ]
 })
