@@ -1,6 +1,12 @@
 <template>
 <div id="bracket">
-		<div class="flex-div" v-if="isRandomed">
+    <div class="center-items">
+        <h1>Setup The Bracket</h1>
+    </div>
+      
+    <div class="center-items" @click="randomizeList"><button>Randomize the Bracket</button></div> 
+
+    <div class="flex-div" v-if="isRandomed">
         <div>
             <div class="bracket-top">{{ players[0].name }}</div>
             <div class="bracket-bottom"></div>
@@ -45,6 +51,7 @@
                 <div class="bracket-top"></div>
             </div>
         </div>
+
     </div>
 </div>
 
@@ -133,3 +140,4 @@
         display: flex
         flex-direction: column
 </style>
+

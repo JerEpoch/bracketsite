@@ -10,6 +10,7 @@ import Login from './views/Login'
 
 import Bracket from './views/Bracket'
 import Index from './views/index'
+import BracketSetup from './views/BracketSetup'
 
 Vue.use(Router)
 
@@ -45,6 +46,14 @@ export default new Router({
         navbar: Navbar,
         subnavbar: SubNavbar,
         main: Bracket
+      }
+    },
+    {
+      path: '/bracketsetup',
+      components: {
+        navbar: Navbar,
+        subnavbar: SubNavbar,
+        main: BracketSetup
       }
     }
 
