@@ -2,6 +2,8 @@
 REST API Resource Routing
 
 http://flask-restful.readthedocs.io/en/latest/
+
+put API routes to be called here!!!
 """
 
 import time

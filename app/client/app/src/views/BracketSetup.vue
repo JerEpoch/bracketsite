@@ -1,60 +1,24 @@
 <template>
-<div id="bracket">
-    <div class="center-items">
-        <h1>Setup The Bracket</h1>
-    </div>
+  <div id="bracket">
+      <div class="center-items">
+          <h1>Setup The Bracket</h1>
+          <p class="med-spacing">Type in the players' name below:</p>
+          <input class="med-spacing" type="text" placeholder="Player's Name" v-model="tournyPlayer">
+          <button @click="addPlayer">Submit</button>
+      </div>
+        
+      <div class="center-items" @click="randomizeList"><button>Randomize the Bracket</button></div>
+      <hr>
+      <div class="center-items">
+        <label>Name</label>
+        <input type="text" v-model="player.username">
+        <label>Email</label>
+        <input type="text" v-model="player.email">
+        <br>
+        <button @click="submitPlayer">Submit</button>
+      </div>
       
-    <div class="center-items" @click="randomizeList"><button>Randomize the Bracket</button></div> 
-
-    <div class="flex-div" v-if="isRandomed">
-        <div>
-            <div class="bracket-top">{{ players[0].name }}</div>
-            <div class="bracket-bottom"></div>
-
-            <div class="bracket-top"></div>
-            <div class="bracket-bottom"></div>
-
-            <div class="bracket-top"></div>
-            <div class="bracket-bottom"></div>
-
-            <div class="bracket-top"></div>
-            <div class="bracket-bottom"></div>
-        </div>
-
-        <div class="winner-bracket-col">
-            <div class="winner-bracket-1">
-                <div class="bracket-top"></div>
-            </div>
-            <div class="winner-bracket-1">
-                <div class="bracket-top"></div>
-            </div>
-
-            <div class="winner-bracket-2">
-                <div class="bracket-top"></div>
-            </div>
-            <div class="winner-bracket-2">
-                <div class="bracket-top"></div>
-            </div>
-        </div>
-
-        <div class="winner-bracket-col">
-            <div class="winner-bracket-3">
-                <div class="bracket-top"></div>
-            </div>
-            <div class="winner-bracket-3">
-                <div class="bracket-top"></div>
-            </div>
-        </div>
-
-        <div class="winner-bracket-col">
-            <div class="winner-bracket-4">
-                <div class="bracket-top"></div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
+  </div>
 </template>
 
 <script>
@@ -71,7 +35,13 @@
         {name: 'Bob 4', isWinner: false},
         {name: 'Jim 4', isWinner: false}
       ],
-      isRandomed: false
+      isRandomed: false,
+      newPlayers: [],
+      player: {
+        username: '',
+        email: ''
+      },
+      tournyPlayer: ''
     }
   },
   methods: {
@@ -86,6 +56,17 @@
       }
       this.players = playerArray
       this.isRandomed = true
+    },
+    submitPlayer () {
+      console.log(this.player)
+      this.$http.post('https://vuejs-http-f1a87.firebaseio.com/data.json', this.player)
+        .then(response => {
+          console.log(response)
+        })
+    },
+    addPlayer () {
+      this.newPlayers.push(this.tournyPlayer)
+      console.log(this.newPlayers)
     }
   }
 }
@@ -94,50 +75,57 @@
 
 
 <style lang="sass" scoped>
-    .center-items
-        display: flex
-        justify-content: center
-        align-items: center
-    
-    .flex-div
-        display: flex
-        justify-content: center
-        margin-top: 50px
-    
-    .bracket-top
-        border-style: solid
-        border-width: 1px
-        height: 60px
-        width: 140px
-        margin-bottom: 1px
-        background-color: #e6e8ed
+  .med-spacing 
+    line-height: 1.5
+    margin-bottom: 5px
 
-    .bracket-bottom
-        border-style: solid
-        border-width: 1px
-        height: 60px
-        width: 140px
-        margin-bottom: 50px
-        background-color: #e6e8ed
+  .center-items
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    padding-bottom: 8px
 
-    .winner-bracket-1 
-        margin-left: 70px
-        transform: translateY(130%)
 
-    .winner-bracket-2 
-        margin-left: 70px
-        transform: translateY(510%)
+  .flex-div
+    display: flex
+    justify-content: center
+    margin-top: 50px
 
-    .winner-bracket-3
-        transform: translateY(400%)
-        margin-left: 70px
-    
-    .winner-bracket-4
-        margin-left: 70px
-        transform: translateY(450%)
+  .bracket-top
+    border-style: solid
+    border-width: 1px
+    height: 60px
+    width: 140px
+    margin-bottom: 1px
+    background-color: #e6e8ed
 
-    .winner-bracket-col 
-        display: flex
-        flex-direction: column
+  .bracket-bottom
+    border-style: solid
+    border-width: 1px
+    height: 60px
+    width: 140px
+    margin-bottom: 50px
+    background-color: #e6e8ed
+
+  .winner-bracket-1 
+    margin-left: 70px
+    transform: translateY(130%)
+
+  .winner-bracket-2 
+    margin-left: 70px
+    transform: translateY(510%)
+
+  .winner-bracket-3
+    transform: translateY(400%)
+    margin-left: 70px
+
+  .winner-bracket-4
+    margin-left: 70px
+    transform: translateY(450%)
+
+  .winner-bracket-col 
+    display: flex
+    flex-direction: column
 </style>
 

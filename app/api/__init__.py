@@ -3,11 +3,14 @@
 import os
 from flask import Flask, Blueprint, session
 from flask_restful import Api
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 api_bp = Blueprint('api_bp', __name__,
                    template_folder='templates',
                    url_prefix='/api')
-
+db = SQLAlchemy()
+migrate = Migrate()
 api_rest = Api(api_bp)
 
 # OPTIONAL
